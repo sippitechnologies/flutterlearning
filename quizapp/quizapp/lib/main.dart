@@ -18,13 +18,20 @@ class MyApp extends StatefulWidget {
 
 class MyAppState extends State<MyApp> {
 
-  var questionIndex=0;
-  var questions = ["What\' is your favourite color?","What\' is your favourite Animal?","What\' is your favourite Hero?"];
+  var _questionIndex=0;
+  var _totalscore=0;
 
-  void updateQuestion()
+  var questions = [{"question":"What\' is your favourite color?",
+  "answers":[{"name":"Red","score":10},{"name":"Green","score":5},{"name":"Blue","score":4},{"name":"Yellow","score":6}]},{"question":"What\' is your favourite Animal?",
+    "answers":[{"name":"Tiger","score":10},{"name":"Loin","score":7},{"name":"Rabbit","score":7},{"name":"Deer","score":8}]},{"question":"What\' is your favourite Hero?",
+    "answers":[{"name":"Dilip Kumar","score":6},{"name":"Raj Kumar","score":10},{"name":"Nana Patakar","score":2}]}];
+
+  void updateQuestion(int score)
   {
+     _totalscore+=score;
+
      setState(() {
-       questionIndex++;
+       _questionIndex++;
      });
 
 
@@ -32,7 +39,8 @@ class MyAppState extends State<MyApp> {
   void reset()
   {
     setState(() {
-      questionIndex=0;
+      _questionIndex=0;
+      _totalscore=0;
     });
 
   }
@@ -43,15 +51,13 @@ class MyAppState extends State<MyApp> {
         appBar: AppBar(
           title: (Text("Quiz App")),
         ),
-        body:questionIndex<questions.length? Column(
+        body:_questionIndex<questions.length? Column(
           children: [
-            Question(title: questions[questionIndex]),
-            Answer("Answer 1",updateQuestion),
-          Answer("Answer 2",updateQuestion),
-          Answer("Answer 3",updateQuestion),
-            Answer("Answer 4",updateQuestion),
+            Question(title: questions[_questionIndex]["question"]),
+          ...((questions[_questionIndex]["answers"] as List<Map<String,Object>>).map((answer) => Answer(answer['name'],()=>updateQuestion(answer['score']))).toList())
+         ,
           ],
-        ):Result("Game is Done","Reset",reset),)
+        ):Result(_totalscore,"Reset",reset),)
     );
   }
 }
