@@ -8,11 +8,13 @@ class TransitionWidget extends StatelessWidget
 
   void onDataSubmitted()
   {
-    if(titleController.text.isEmpty || double.parse(amountController.text.toString())<=0)
+   /* final title=titleController.text.toString();
+    //final amount =double.parse(amountController.text.toString());
+    if(title.isEmpty || amount<=0)
       {
         return ;
-      }
-    handler(titleController.text,double.parse(amountController.text.toString()));
+      }*/
+    handler("Hello",90.0);
   }
   TransitionWidget(this.handler);
   @override
@@ -20,7 +22,7 @@ class TransitionWidget extends StatelessWidget
     return Container(child: Column(children: [TextField(decoration: InputDecoration(labelText: "Enter User Name"),controller: titleController,/*onChanged: (val){
           username=val;
         }*/),
-      TextField(decoration: InputDecoration(labelText: "Enter Password"),controller: amountController,keyboardType: TextInputType.number,onSubmitted:(_)=>onDataSubmitted(),/*onChanged: (val){
+      TextField(decoration: InputDecoration(labelText: "Enter Password"),controller: amountController,keyboardType: TextInputType.number,/*onChanged: (val){
           password=val;
         }*/),FlatButton(child: Text("Submit",style: TextStyle(color: Colors.black,fontSize: 20,fontWeight: FontWeight.bold),),
         onPressed:onDataSubmitted,)],crossAxisAlignment: CrossAxisAlignment.end,),padding: EdgeInsets.all(5),margin: EdgeInsets.all(2),);
