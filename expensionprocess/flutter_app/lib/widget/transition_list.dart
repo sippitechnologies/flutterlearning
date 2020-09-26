@@ -14,7 +14,7 @@ class TransitionList extends StatelessWidget
    return Container(height: 300,
      child: ListView.builder(itemBuilder: (context,index){
        var selectedtranstion= transactions[index];
-       return Card(child: Row(children: [Container (child: Text("\$${selectedtranstion.amount}",style: TextStyle(color: Colors.purple,fontSize: 20,fontWeight: FontWeight.bold),),
+       return Card(child: Row(children: [Container (child: Text("\$${selectedtranstion.amount.toStringAsFixed(2)}",style: TextStyle(color: Colors.purple,fontSize: 20,fontWeight: FontWeight.bold),),
          margin: EdgeInsets.symmetric(vertical: 10,horizontal: 10),
          padding: EdgeInsets.all(10),decoration: BoxDecoration(border: Border.all(width: 2,color: Colors.purple,style: BorderStyle.solid)),),
          Column(children: [Text(selectedtranstion.title,style: TextStyle(color: Colors.black,fontSize: 16,fontWeight: FontWeight.bold),),
