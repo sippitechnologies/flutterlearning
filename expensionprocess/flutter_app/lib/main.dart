@@ -8,11 +8,11 @@ import 'widget/user_transitions.dart';
 void main() {
   runApp(MyApp());
 }
-class MyApp extends StatelessWidget
-{
+
+class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-   return MaterialApp(title: "Expense App",home: MyHomePage());
+    return MaterialApp(title: "Expense App", home: MyHomePage(),theme: ThemeData(primarySwatch:Colors.purple,accentColor: Colors.amber),);
   }
 }
 
@@ -28,8 +28,8 @@ class _MyHomePageState extends State<MyHomePage> {
   void addTransition(String title, double amount) {
     final transition = Transition(
         id: DateTime.now().toString(),
-        title: "Shoes",
-        amount: 90.0,
+        title: title,
+        amount: amount,
         date: DateTime.now());
     setState(() {
       transactions.add(transition);
@@ -40,43 +40,44 @@ class _MyHomePageState extends State<MyHomePage> {
     showModalBottomSheet(
         context: buildContext,
         builder: (dcontext) {
-          return GestureDetector(child: TransitionWidget(addTransition),onTap: (){},behavior: HitTestBehavior.opaque,);
+          return GestureDetector(
+            child: TransitionWidget(addTransition),
+            onTap: () {},
+            behavior: HitTestBehavior.opaque,
+          );
         });
   }
 
   @override
   Widget build(BuildContext context) {
-    return
-      Scaffold(
-        appBar: AppBar(
-          title: Text("Expense App"),
-          actions: [
-            IconButton(
-              icon: Icon(Icons.add),
-              onPressed: ()=>
-                stratAddTransactions(context)
-               ,
-            )
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Expense App"),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.add),
+            onPressed: () => stratAddTransactions(context),
+          )
+        ],
+      ),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Card(
+              child: Text("Chart Panel"),
+            ),
+            TransitionList(transactions)
           ],
         ),
-        body: SingleChildScrollView(
-          child: Column(
-            children: [
-              Card(
-                child: Text("Chart Panel"),
-              ),
-              TransitionList(transactions)
-            ],
-          ),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      floatingActionButton: FloatingActionButton(
+        child: IconButton(
+          icon: Icon(Icons.add),
         ),
-        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-        floatingActionButton: FloatingActionButton(
-          child: IconButton(
-            icon: Icon(Icons.add),
-          ),
-          onPressed: () => stratAddTransactions(context),
-        ),
-      );
+        onPressed: () => stratAddTransactions(context),
+      ),
+    );
   }
 
   void onSubmittedClicked() {}
