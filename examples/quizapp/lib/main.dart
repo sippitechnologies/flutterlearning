@@ -1,4 +1,8 @@
+import 'dart:html';
+
 import 'package:flutter/material.dart';
+import 'package:quizapp/question.dart';
+import 'package:quizapp/answer.dart';
 
 void main() {
   runApp(MyApp());
@@ -31,37 +35,58 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class MyHomePage extends StatelessWidget {
+class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
   final String title;
   var questions = ['What is your favourite Color?', 'What\'is your Name'];
+  List<Map<String, Object>> questionsAnswers = [
+    {
+      'question': 'What is your favourite color',
+      'answers': ['RED', 'GREEN', "BLACK"]
+    },
+    {
+      'question': 'What\'s Your favourite Animal',
+      'answers': ['Rabit', 'Lion', "Bear"]
+    },
+    {
+      'question': 'What\'s your favourite Food',
+      'answers': ['Rice', 'Roti', "Chiken"]
+    }
+  ];
+  var index = 0;
 
-  void questionAnswer() {
-    print("I am Question Ansewr Method");
+  @override
+  State<StatefulWidget> createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage> {
+  void changeTitle() {
+    setState(() {
+      widget.index = widget.index + 1;
+    });
   }
 
   @override
   Widget build(BuildContext context) {
+    final List<String> listofAnswers =
+        widget.questionsAnswers[widget.index]['answers'];
     return Scaffold(
       appBar: AppBar(
-        title: Text(title),
+        title: Text(widget.title),
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text(questions[0]),
-          RaisedButton(
-            onPressed: questionAnswer,
-            child: Text('Anser 1'),
-          ),
-          RaisedButton(
-            onPressed: questionAnswer,
-            child: Text('Anser 2'),
-          ),
-          RaisedButton(
-            onPressed: questionAnswer,
-            child: Text('Anser 3'),
-          )
+          (widget.index < widget.questionsAnswers.length)
+              ? {
+                  Question(widget.questionsAnswers[widget.index]['question']),
+                  ...(widget.questionsAnswers[widget.index]['answers']
+                          as List<String>)
+                      .map((answer) {
+                    return Answer(changeTitle, answer);
+                  }).toList()
+                }
+              : Text("Hello Wrold")
         ],
       ),
     );
