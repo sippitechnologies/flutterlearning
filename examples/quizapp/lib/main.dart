@@ -1,8 +1,6 @@
-import 'dart:html';
-
 import 'package:flutter/material.dart';
-import 'package:quizapp/question.dart';
 import 'package:quizapp/answer.dart';
+import 'package:quizapp/question.dart';
 
 void main() {
   runApp(MyApp());
@@ -68,8 +66,6 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    final List<String> listofAnswers =
-        widget.questionsAnswers[widget.index]['answers'];
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
@@ -83,7 +79,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   ...(widget.questionsAnswers[widget.index]['answers']
                           as List<String>)
                       .map((answer) {
-                    return Answer(changeTitle, answer);
+                    return Text('Hello Dear');
                   }).toList()
                 }
               : Text("Hello Wrold")
