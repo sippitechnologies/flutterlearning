@@ -40,7 +40,10 @@ class MyHome extends StatelessWidget {
                   Expanded(
                     child: Text(
                       'Mozrilla',
-                      style: TextStyle(fontSize: 40, color: Colors.blue),
+                      style: TextStyle(
+                          fontSize: 40,
+                          color: Colors.blue,
+                          fontWeight: FontWeight.bold),
                     ),
                   ),
                   Expanded(
