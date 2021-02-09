@@ -8,6 +8,7 @@ void main() {
         child: Text(
           getGreeting(),
           textDirection: TextDirection.ltr,
+          textAlign: TextAlign.center,
         ),
         color: Colors.blue,
       )));

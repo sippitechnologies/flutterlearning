@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 class PizzaImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Center(
+    return Container(
+      height: 100,
       child: getImage(context),
     );
   }
