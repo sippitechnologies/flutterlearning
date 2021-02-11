@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/material.dart';
 import 'hellohome.dart';
 
 class HelloApp extends StatelessWidget {
