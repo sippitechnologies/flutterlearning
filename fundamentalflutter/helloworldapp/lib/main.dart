@@ -1,4 +1,4 @@
 import 'package:flutter/material.dart';
-import './apps/tripcostcalculator/tipcalculatorapp.dart';
+import './apps/quizeapp/quizapp.dart';
 
-void main() => runApp(TripCostCalculator());
+void main() => runApp(QuizApp());
